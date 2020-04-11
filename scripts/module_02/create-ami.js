@@ -1,14 +1,26 @@
 // Imports
-// TODO: Import the aws-sdk
+const AWS = require('aws-sdk');
 
-// TODO: Configure region
+AWS.config.update({
+  region: 'eu-west-3'
+})
 
 // Declare local variables
-// TODO: Create an ec2 object
+const ec2 = new AWS.EC2();
 
-createImage('<instanceid>', 'hamsterImage')
+createImage('i-0659b14d51e7d261f', 'hamsterImage')
 .then(() => console.log('Complete'))
 
 function createImage (seedInstanceId, imageName) {
-  // TODO: Implement AMI creation
+  const params = {
+    // the id of the instance to copy form
+    InstanceId: seedInstanceId,
+    Name: imageName
+  }
+  return new Promise((resolve, reject) => {
+    ec2.createImage(params, (err, data) => {
+      if(err) reject(err);
+      else resolve(data);
+    });
+  })
 }

@@ -1,21 +1,34 @@
 // Imports
 const AWS = require('aws-sdk')
 
-AWS.config.update({ region: '/* TODO: Add your region */' })
+AWS.config.update({ region: 'eu-west-3' });
 
 const ec2 = new AWS.EC2()
-// TODO: Create an rds object
+const rds = new AWS.RDS();
 const dbName = 'user'
 
 createSecurityGroup(dbName)
 .then(sgId => createDatabase(dbName, sgId))
 .then(data => console.log(data))
 
+
 function createDatabase (dbName, sgId) {
-  // TODO: Create the params object
+  const params = {
+    AllocatedStorage: 5, // in giga
+    DBInstanceClass: 'db.t2.micro', // instance type
+    DBInstanceIdentifier: dbName,
+    Engine: 'mysql',
+    DBName: dbName,
+    VpcSecurityGroupIds: [sgId], // security group to be associated
+    MasterUsername: 'admin',
+    MasterUserPassword: 'mypassword'
+  }
 
   return new Promise((resolve, reject) => {
-    // TODO: Create the db instance
+    rds.createDBInstance(params, (err, data) => {
+      if(err) reject(err);
+      else resolve(data);
+    })
   })
 }
 
@@ -27,7 +40,18 @@ function createSecurityGroup (dbName) {
 
   return new Promise((resolve, reject) => {
     ec2.createSecurityGroup(params, (err, data) => {
-      if (err) reject(err)
+      if (err) { // if err search securityGroup
+        const params = {
+          GroupNames :[
+            `${dbName}-db-sg`
+          ]
+        }
+      
+        ec2.describeSecurityGroups(params, (err, data) => {
+          if(err) reject(err);
+          else resolve(data.GroupId);
+        });
+      } 
       else {
         const sgGroupId = data.GroupId
         const params = {
@@ -51,5 +75,20 @@ function createSecurityGroup (dbName) {
         })
       }
     })
+  })
+}
+
+function getSecurityGroup(dbName) {
+  const params = {
+    GroupNames :[
+      `${dbName}-db-sg`
+    ]
+  }
+
+  return new Promise((resolve, reject) => {
+    ec2.describeSecurityGroups(params, (err, data) => {
+      if(err) reject(err);
+      else resolve(data.GroupId);
+    });
   })
 }

@@ -2,8 +2,7 @@ const AWS = require('aws-sdk')
 
 const RACES_TABLE = 'races'
 
-AWS.config.update({ region: '/* TODO: Add your region */' })
-
+AWS.config.update({ region: 'eu-west-3' });
 const client = new AWS.DynamoDB.DocumentClient()
 
 exports.handler = (event, context, callback) => {
