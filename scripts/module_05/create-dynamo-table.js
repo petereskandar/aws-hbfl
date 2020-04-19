@@ -29,7 +29,12 @@ function createTable (tableName) {
     ProvisionedThroughput: {
       ReadCapacityUnits: 5,
       WriteCapacityUnits: 5
-    }
+    },
+    // enable DynamoDB TTL
+    /*TimeToLiveDescription: {
+      AttributeName: "ExpirationTime",
+      TimeToLiveStatus: "ENABLED"
+    }*/
   }
 
   return new Promise((resolve, reject) => {

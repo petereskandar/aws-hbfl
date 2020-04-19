@@ -7,36 +7,42 @@ const hamsterData = [
     name: 'Zepto',
     type: 'Speedball',
     src: assets.hamster1,
+    ExpirationTime: '1587266064',
     results: []
   }, {
     id: 2,
     name: 'Milkshake',
     type: 'Speedball',
     src: assets.hamster2,
+    ExpirationTime: '1587266064',
     results: []
   }, {
     id: 3,
     name: 'Fievel',
     type: 'Tiny Terror',
     src: assets.hamster3,
+    ExpirationTime: '1587266064',
     results: []
   }, {
     id: 4,
     name: 'Baby Ham',
     type: 'Roller',
     src: assets.hamster4,
+    ExpirationTime: '1587266064',
     results: []
   }, {
     id: 5,
     name: 'Tater',
     type: 'Stealth',
     src: assets.hamster5,
+    ExpirationTime: '1587266064',
     results: []
   }, {
     id: 6,
     name: 'Peter Pan',
     type: 'ZigZagger',
     src: assets.hamster6,
+    ExpirationTime: '1587266064',
     results: []
   }
 ]
@@ -46,18 +52,21 @@ const raceData = [
     venue: 'Petco 2000',
     city: 'Seattle, WA',
     date: '04/29/17',
+    ExpirationTime: '1587266064',
     results: []
   }, {
     id: 2,
     venue: 'Triscuit Circuit 4700',
     city: 'Daytona Beach, FL',
     date: '09/21/17',
+    ExpirationTime: '1587266064',
     results: []
   }, {
     id: 3,
     venue: 'Kraft 35',
     city: 'Tokyo, Japan',
     date: '07/14/17',
+    ExpirationTime: '1587266064',
     results: []
   }
 ]
