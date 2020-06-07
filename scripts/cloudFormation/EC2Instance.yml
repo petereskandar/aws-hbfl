@@ -1,0 +1,12 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: 'ami-0357d42faf6fa582f'
+      InstanceType: 't2.micro'
+      KeyName: 'webApp-EC2-keys'
+Outputs:
+  InstanceID:
+    Description: The Instance ID
+    Value: !Ref EC2Instance
