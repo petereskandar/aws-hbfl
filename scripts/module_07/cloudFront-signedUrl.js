@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 AWS.config.update({ region: 'eu-west-2' });
 
-const cloudFront = new AWS.CloudFront.Signer('AKIATU3OLSML2J2UNKOF', 'DUNaiWhJKoF6PD78zFfKtzf6mZ6aD4KZE+ZfqB9V');
+const cloudFront = new AWS.CloudFront.Signer('', '');
 
 getCloudFrontSignedURL()
 .then(console.log)
